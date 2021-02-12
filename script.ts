@@ -1,0 +1,143 @@
+//Karten Interface
+interface Value {
+    icon: string;
+    colour: string;
+    text: string;
+}
+
+//Karten Array
+var cards: Value[] = [
+    {
+        icon: "fas fa-cat",
+        colour: "#F78181",
+        text: ""
+    },
+    {
+        icon: "fas fa-cat",
+        colour: "#F78181",
+        text: ""
+    },
+    {
+        icon: "fas fa-dragon",
+        colour: "#F5DA81",
+        text: ""
+    },
+    {
+        icon: "fas fa-dragon",
+        colour: "#F5DA81",
+        text: ""
+    },
+    {
+        icon: "fas fa-fish",
+        colour: "#81F781",
+        text: ""
+    },
+    {
+        icon: "fas fa-fish",
+        colour: "#81F781",
+        text: ""
+    },
+    {
+        icon: "fas fa-horse",
+        colour: "#819FF7",
+        text: ""
+    },
+    {
+        icon: "fas fa-horse",
+        colour: "#819FF7",
+        text: ""
+    }
+];
+
+
+//Variablen definieren und das DOM Element verknüpfen
+var grid: HTMLElement = document.querySelector(".grid"); 
+var scoreComputer: HTMLSpanElement = document.querySelector(".scoreComputer"); 
+var scoreUser: HTMLSpanElement = document.querySelector(".scoreUser"); 
+
+//Schleife die das Grid mit den Array Objekten befüllt. Erzeugtes DIVElement  bekommt die Objekte aus dem Array, als auch eine Hintergrundfarbe die als Rückseite erscheint. 
+for (let index: number = 0; index < cards.length; index++) {
+    let card: HTMLDivElement = document.createElement("div");
+    card.classList.add("card");
+    card.style.backgroundColor = "grey";
+    card.addEventListener("click", function(): void {
+        card.innerHTML = "<i class='" + cards[index].icon  + "'></i>"; 
+        card.style.backgroundColor = cards[index].colour;
+        setTimeout(() => {
+            card.innerHTML = "";
+            card.style.backgroundColor = "grey";
+        },         1000);
+    });
+    grid.appendChild(card);
+}
+
+//Erzeugte DIVs (Karten) werden beim neu laden der Seite/Spiels durcheinander angeordnet. Dabei bekommen die Index Plätze random die Werte zugeschrieben.
+function randomizeArray(): void { 
+    cards.sort(() => 0.5 - Math.random());
+    }
+
+randomizeArray();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Array für die zwei geklickten Karten der Spieler. In diesem Array werden die Karten verglichen ob sie ein Paar sind oder nicht.
+//var openedCards: Value[] = [];
+//
+//grid.addEventListener("click", function (event): void {
+//    const clickTarget = event.target;
+//    console.log(clickTarget);
+//    if (clickTarget.classList.contains("card") && !openedCards.includes(clickTarget)) {
+//        addClickedCards(clickTarget);
+//    }
+//});
+//
+//function addClickedCards(clickedTarget): void {
+//    openedCards.push();
+//    if (openedCards.length === 2) {
+//        matchingCards();
+//    }
+//}
+//
+//function matchingCards(): void {
+//    if (openedCards[0].firstElementChild.className === openedCards[1].firstElementChild.className) {
+//        console.log("we have a match");
+//        openedCards = [];
+//        endGame();
+//    } else {
+//        console.log(openedCards[0].firstElementChild.classList);
+//        console.log(openedCards[1].firstElementChild.classList);
+//        console.log("no match");
+//        setTimeout(function (): void {
+//            openedCards[0].classList.toggle("open");
+//            openedCards[0].classList.toggle("show");
+//            openedCards[1].classList.toggle("open");
+//            openedCards[1].classList.toggle("show");
+//            openedCards = [];
+//        },         1000);
+//    }
+//}
+
+
+
+
+// Karten vergleichen
+//const checkMatch: string = (icons) => {
+//    if (icons[0] === icons[1]) {
+//        console.log("it's a match");
+//        return true;
+//    }
+//};

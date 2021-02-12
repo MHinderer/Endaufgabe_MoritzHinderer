@@ -1,0 +1,67 @@
+html {
+    width: 1280px;
+    height: 800px;
+    background-image: radial-gradient(#F7BE81, #61380B);
+    font-family: sans-serif;
+}
+
+body {
+    padding: 0px;
+    margin: 0px;
+    overflow: hidden;
+}
+
+#footer {
+    position: absolute;
+    text-align: center;
+    bottom: 0px;
+    width: 100%;
+    background-color: #424242;
+    color: #D8D8D8;
+    font-size: 10px;
+    font-weight: 300;
+}
+
+#gamemody {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat( auto-fit, 60px );
+    grid-auto-rows: 60px;
+    grid-gap: 5px;
+    justify-content: center;
+    perspective: 800px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+    
+    .card { 
+    display: inline-flex;
+    align-content: center;
+    justify-content: center;
+    margin: 2px; 
+    transform-style: preserve-3d; 
+    transition: transform 0.5s; 
+    font-size: 30px;
+    } 
+    
+    .card.flip { 
+    transform: rotateY(180deg); 
+    } 
+    
+    .data { 
+    display: flex; 
+    justify-content: space-between; 
+    padding: 20px 30px; 
+    font-size: 23px; 
+    } 
+    
+    .data span { 
+    color: rgb(206, 121, 11);
+    font-size: 30px; 
+    }
