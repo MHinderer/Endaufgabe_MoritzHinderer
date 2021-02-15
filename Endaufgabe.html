@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,19 +10,21 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
+
 <body class="body">
-    <div class="container">
-        <div class="data">
-        <div class="scoreComputer">Score : <span class="scoreComputer">0</span></div>
-        <div class="scoreUser">Score : <span class="scoreUser">0</span></div>
-        </div>
-        <div class="menü">
-            <button id="easyButton">LEICHT</button>
-            <button id="middleButton">MITTEL</button>
-            <button id="hardButton">SCHWER</button>
-        </div>
-        <div class="grid">
-        </div>
+    <div class="menü">
+        <button id="easyButton">LEICHT</button>
+        <button id="middleButton">MITTEL</button>
+        <button id="hardButton">SCHWER</button>
+    </div>
+    <div class="gamefield">
+        <div class="scoreC">Score : <span class="scoreComputer">0</span></div>
+        <div class="scoreU">Score : <span class="scoreUser">0</span></div>
+        <div class="grid"></div>
+    </div>
+    <div id="afterGame">
+        <h2 class="winMessage">YOU WON</h2>
+        <button id="replay">REPLAY</button>
     </div>
     <footer id="footer">
         <p>Student: Moritz Hinderer &nbsp; &nbsp; &nbsp; Matrikelnummer: 267208</p>
