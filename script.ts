@@ -45,6 +45,7 @@ var hiddenArray: HTMLDivElement [] = [];
 var scoreComputerArray: number [] = [];
 var scorePlayerArray: number [] = [];
 var userIndex: number [] = [];
+var computerIndex: number [] = [];
 
 //Karten Array LEICHT
 var cards: Wearth[] = [
@@ -98,6 +99,7 @@ var cards: Wearth[] = [
     }
 ];
 
+//MITTEL & SCHWER benötigen eine eigene computer function
 //Computer
 //Kann zufällige Indexe aus meinem Kartenarray wählen und ausgeben.
 //Pusht die random Indexe in ein leeres randomArray.
@@ -106,22 +108,19 @@ var cards: Wearth[] = [
 //Somit kann der Computer nicht eine Karten zwei mal aufdecken.
 function computer(): void {
     setTimeout (() => {
-    const random1: number = Math.floor(Math.random() * cards.length);
-    const random2: number = Math.floor(Math.random() * cards.length);
-    const randomCard1: Wearth = cards[random1];
-    const randomCard2: Wearth = cards[random2];
+    //Wenn du Array Länge 4 ist, hört der Computer auf, random Zahlen auszuwählen und zu vergleichen.
+    if (computerIndex.length < 4) {
+    const random1: number = Math.floor(Math.random() * cards.length);                       // Diese const müssen ebenfalls für MITTEL & SCHWER erstellt werden, da diese eine andere Array Länge haben.(cards.lenght)
+    const random2: number = Math.floor(Math.random() * cards.length);                       // Diese const müssen ebenfalls für MITTEL & SCHWER erstellt werden, da diese eine andere Array Länge haben.(cards.lenght)
+    const randomCard1: Wearth = cards[random1];                                             
+    const randomCard2: Wearth = cards[random2];                                             
 
-    let card1: HTMLDivElement = document.querySelector(".card" + random1);
-    let card2: HTMLDivElement = document.querySelector(".card" + random2);
-
-    console.log(random1);
-    console.log(random2);
+    let card1: HTMLDivElement = document.querySelector(".card" + random1);                  
+    let card2: HTMLDivElement = document.querySelector(".card" + random2);                  
 
     var randomArray: number[] = [];
-    randomArray.push(random1);
-    randomArray.push(random2);
-
-    console.log(randomArray);
+    randomArray.push(random1);                                                              
+    randomArray.push(random2);                                                              
 
     //randomArray Indexe dürfen nicht gleich sein.
     if (randomArray[0] != randomArray[1]) {
@@ -131,7 +130,7 @@ function computer(): void {
         //random Karte2 muss die Klasse "hidden" besitzen.
         } else if (card2.classList.contains("hidden")) {
             computer();
-        //Wenn dise nicht diese Klassen besitzen wird die Funktion 
+        //Wenn dise nicht diese Klasse besitzen wird die Funktion 
         //element und time mit den jeweiligen randome Karten als
         //Argument ausgeführt.
         } else {
@@ -147,11 +146,12 @@ function computer(): void {
     } else {
         computer();
     }
+    }
     },          200);
 
 }
 
-//Funktion time dreht die geklickte Karte nach einer bestimmten Zeit wieder um.
+//Funktion time dreht die gewählte Karte des Computers nach einer bestimmten Zeit wieder um.
 function time(index: number): void {
     let card: HTMLDivElement = document.querySelector(".card" + index);
     setTimeout (() => {
@@ -166,29 +166,44 @@ function time(index: number): void {
 //Schleife die das Grid mit den Array Objekten befüllt. Erzeugtes DIVElement  bekommt die Objekte aus dem Array,
 //als auch eine Hintergrundfarbe die als Rückseite erscheint.
 function cardGenerator(): void { 
+//Die Schleife wiederholt sich so oft, wie die Länge des Arrays ist. Dadurch bekommt jede "Karte"/Objekt einmal die Klasse
+//und einmal den Index. Somit kann auf die CSS Klasse wie auch den Index der jeweiligen Karten zugegriffen werden.
 for (let index: number = 0; index < cards.length; index++) {
     let card: HTMLDivElement = document.createElement("div");
     card.classList.add("card");
     card.classList.add("card" + index);
     
+    //Die Rückseite bekommt die Fabre
     card.style.backgroundColor = "grey";
 
+    //Das DIV Element grid (Spielfeld) bekommt die einzelne Karten/Objekte geerbt.
+    //Somit werden die Karten im DOM sichtbar.
     grid.appendChild(card);
 
+    //Klick Funktion auf den einzelnen Karten.
     card.addEventListener("click", function (): void {
+        //Nur wenn der Spieler am Zug ist, kann der Index der geklickten Karten ins Array gepusht werden.
+        //Somit wird verhindert, dass der Player während der Computer am Zug ist, klicken kann.
         if (playerBo == true) {
         userIndex.push(index);
         console.log(userIndex);
         }
+        //Wenn der Player am Zug ist und schon ein Index ins Array gepusht wurde,
+        //wird die Funktion element mit dem Index als Argument aufgerufen.
         if (userIndex.length == 1 && playerBo == true) {
                 computerBo = false;
                 element(index);
                 console.log(element);
+            //Wenn das Array zwei Indexe hat, wird noch eine Condition gestellt.
             }
             else if (userIndex.length == 2) {
+                //Hier sagen wir wenn diese zwei Indexe den gleichen Index/Zahl aus dem cards Array haben,
+                //dann soll der letzte Index aus dem userIndex wieder rausgelöscht werden.
                 if (userIndex[0] == userIndex[1]) {
                     userIndex.pop();
                 }
+                //Ansonsten wird wieder die Funktion element mit dem Argument Index ausgeführt
+                //und danach wird das userIndex Array geleert.
                 else {
                     element(index);
                     userIndex = [];
@@ -199,48 +214,75 @@ for (let index: number = 0; index < cards.length; index++) {
 }
 }
 
+//Funktion element pusht die verschiedenen Eigenschaften des cards Array in die nötigen Arrays.
+//Außerdem manipuliert sie den DOM, indem mit inner.HTML die Eigenschaften wie Farbe und Piktogram
+//auf die erzeugten DIVElemente gepackt werden.
 function element(index: number): void {
+    //Wenn das hiddenArray kleiner als zwei ist, dann wird alles manipuliert und gepusht.
+    // Die if Condition limitiert den Player auf zwei Klicks.
     if ( hiddenArray.length < 2) {
     let card: HTMLDivElement = document.querySelector(".card" + index);
     card.innerHTML = "<i class='" + cards[index].icon + "'></i>";
     card.style.backgroundColor = cards[index].colour;
 
+    //Die Eigenschaft Farbe und Schlüssel werden in das leere Array openCards gepusht.
     openCards.push(cards[index].colour);
     openCards.push(cards[index].key);
     console.log(openCards);
 
+    //Das erzeugte DIVElement card wird in das leere hiddenArray gepusht.
     hiddenArray.push(card);
     console.log(hiddenArray);
 
+    //Funktion addClickedCards wird mit dem Argument Index aufgerufen
     addClickedCards(index);
     }
 }
 
-//Erzeugte DIVs (Karten) werden beim neu laden der Seite/Spiels durcheinander angeordnet. Dabei bekommen die Index Plätze random die Werte zugeschrieben.
+//Erzeugte DIVs (Karten) werden beim neu laden der Seite/Spiels durcheinander angeordnet. 
+//Dabei bekommen die Index Plätze random die Eigenschaften/Werte zugeschrieben.
 function randomizeArray(): void {
     cards.sort(() => 0.5 - Math.random());
 }
 
 randomizeArray();
 
+//Funktion addClickedCards limitiert die Länge des openCards Array auf maximal zwei Karten.
+//Jedes mal wenn eine Karte geklickt wird, werden die zwei Eigenschaften (Farbe und Schlüssel) 
+//ins openCards Array gepusht. Wenn zwei Karten (4 Eigenschaften/Werte) im Array sind, wird
+//die Funktion matchingCards aufgerufen.
 function addClickedCards(index: number): void {
     if (openCards.length == 4) {
         matchingCards();
     }
 }
 
-//if/else
+//Funktion matchingCards vergleicht ob die geklickten Karten ein Paar sind oder nicht.
 function matchingCards(): void {
+    //setTimeout sagt das die Funktion sobald ein Kartenpaar gefunden wurde,
+    //noch 1 Sekunde geöffnet bleibt.
     setTimeout(() => {
+    //Wenn der Index 0 und 2 (Farbe) gleich ist und Index 1 und 3 (Schlüssel) des openCards Array
+    //ungleich ist, dann dann bekommen die DIVElemente (Karten) im hiddenArray (Index 0&1) die
+    //Klasse hidden hinzu. Diese sagt im CSS das die visibillity hidden ist.
     if (openCards[0] == openCards[2] && openCards[1] != openCards[3]) {
         hiddenArray[0].classList.add("hidden");
         hiddenArray[1].classList.add("hidden");
         console.log(openCards[0] == openCards[2] && openCards[1] != openCards[3]);
+        //Bei jedem erkannten Kartenpaar wird eine Nummer in das computerIndex Array gepusht.
+        //Somit weis der Computer in der computer Funktion, wann das Spiel zu Ende ist.
+        computerIndex.push(1);
         
+        //Die zwei Arrays für die Karten werden anschließend geleert, damit wieder die Index Plätze für
+        //neu angeklickte Karten frei werden und diese verglichen werden können.
         openCards = [];
         hiddenArray = [];
        
-        if (cards.length != 0 && computerBo == true) {
+        //Wenn der Computer ein Paar hat, wird eine Nummer in das scoreComputerArray gepusht und
+        //mit dem Aufruf counter() wird sein Punktestand um eins erhöht.
+        //Auch die Funktion computer wird nochmals aufgerufen weil er bei einem Paar
+        //nochmal einen Zug hat. Anschließend werden die Karten Arrays wieder geleert.
+        if (computerBo == true) {
             scoreComputerArray.push(1);
             counter();
             computer();
@@ -248,6 +290,9 @@ function matchingCards(): void {
             openCards = [];
         }
 
+        //Wenn der Player ein Paar hat, wird eine Nummer in das scorePlayerArray gepusht und
+        //mit dem Aufruf counter() wird sein Punktestand um eins erhöht.
+        //Anschließend werden die Karten Arrays wieder geleert.
         if (computerBo == false) {
             scorePlayerArray.push(1);
             counter();
@@ -255,8 +300,12 @@ function matchingCards(): void {
             openCards = [];
         }
 
+    //Wenn beide kein Kartenpaar haben:
     } else {
         
+        //Der Computer hat kein Kartenpaar, anschließend wird der Player boolean true 
+        //womit der Player am Zug ist. Auch wenn kein Kartenpaar vorhanden ist, müssen
+        //die Kartenarrays geleert werden um Platz für neu geklickte zu machen.
         if ( computerBo == true && playerBo == false) {
             setTimeout(() => {
                 playerBo = true;
@@ -264,6 +313,13 @@ function matchingCards(): void {
             hiddenArray = [];
             openCards = [];
      
+        //Der Player hat kein Kartenpaar, anschließend wird der Computer boolean true 
+        //womit der Computer am Zug ist. Doch davor noch, werden die zwei DIVElemente im 
+        //hiddenArray manipuliert. Dabei wird der Inhalt des DIVs geleert und eine neue 
+        //Hintergrundfarbe gegeben. Dies simuliert das umdrehen der geöffneten Katen.
+        //Die Karten werden wieder in die vorherige Position gebracht und erst dann
+        //wird der Computer boolean true gesetzt und die Kartenarrays geleert.
+        //Damit der Computer anfängt zu Spielen muss noch seine Funktion aufgerufen werden.
         } else if (computerBo == false && playerBo == true) {
             hiddenArray[0].innerHTML = "";
             hiddenArray[1].innerHTML = "";
@@ -287,20 +343,28 @@ function matchingCards(): void {
             },         1000);
         }
     }
-},             500);
+},             1000);
 }
 
-//Zähler
+//Funktion counter erhöht den Spielstand der Spieler, welches ein Kartenpaar aufgedeckt haben.
 function counter(): void {
+    //Diese var ist der Gesamtpunktestand. Somit kann ich sagen wann das Spiel zuende ist.
     var res: number = scorePlayerArray.length + scoreComputerArray.length;
+    //Spielstand der einzelnen wird bei aktuallisierung manipuliert.
     scoreComputer.innerHTML = "Score" + scoreComputerArray.length;
     scoreUser.innerHTML = "Score" + scorePlayerArray.length;
 
+    //Wenn der Gesamtpunktestand 4 erreicht, dann wird das Spielfeld verschwinden
+    //und die Gewinnbenachrichtigung mit dem replay button erscheinen.
     if ( res == 4) {
         afterGame.setAttribute("style", "display:unset");
         gamefield.setAttribute("style", "display:none");
+        //Wenn der Punktestand des Computers größer ist, wird die Gewinnbenachrichtigung
+        //manipuliert und ändert sich von YOU WIN zu YOU LOSE.
         if (scoreComputerArray.length > scorePlayerArray.length) {
             winMessage.innerHTML = "YOU LOSE";
+        //Bei Gleichstand wird die Gewinnbenachrichtigung ebenfalls manipuliert
+        //und es wird DRAW ausgegeben.
         } else if (scoreComputerArray.length == scorePlayerArray.length) {
             winMessage.innerHTML = "DRAW";
         }
