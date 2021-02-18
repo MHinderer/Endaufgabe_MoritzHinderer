@@ -1,11 +1,11 @@
 //Der Code kann parallelen zu dem Code von Julian Himmel aufweisen, da wir die meiste Zeit zusammen über Alfaview programmiert haben!
 //Variablen definieren und somit die DOM Element später zu manipulieren
 var menü = document.querySelector(".menü");
-var gridEASY = document.querySelector(".gridEASY");
-var scoreComputer = document.querySelector(".scoreComputer");
-var scoreUser = document.querySelector(".scoreUser");
-var gamefieldEASY = document.querySelector(".gamefieldEASY");
-var easyButton = document.getElementById("easyButton");
+var gridHARD = document.querySelector(".gridHARD");
+var scoreComputer = document.querySelector(".scoreComputer3");
+var scoreUser = document.querySelector(".scoreUser3");
+var gamefieldHARD = document.querySelector(".gamefieldHARD");
+var hardButton = document.getElementById("hardButton");
 var winMessage = document.querySelector(".winMessage");
 var replay = document.querySelector("#replay");
 var afterGame = document.querySelector("#afterGame");
@@ -16,14 +16,14 @@ var computerBo = true;
 //und das Spielfled erscheint. Anschließend werden die Karten generiert
 //und im DOM sichtbar. Der Button ist nur einmal anklickbar,
 //damit sich bei weiterem klicken darauf, keine neue Karten generieren.
-easyButton.addEventListener("click", function () {
+hardButton.addEventListener("click", function () {
     menü.setAttribute("style", "display:none");
-    gamefieldEASY.setAttribute("style", "display:unset");
-    cardGenerator();
+    gamefieldHARD.setAttribute("style", "display:unset");
+    cardGenerator3();
     setTimeout(function () {
-        computer();
+        computer3();
     }, 1000);
-    easyButton.disabled = true;
+    hardButton.disabled = true;
 });
 //leere Arrays
 var openCards = [];
@@ -33,54 +33,198 @@ var scorePlayerArray = [];
 var userIndex = [];
 var computerIndex = [];
 //Karten Array LEICHT
-var cards = [
+var cards3 = [
     {
-        icon: "fas fa-cat",
+        icon: "",
         colour: "#F78181",
-        text: "",
+        text: "Kaskadierung 1 =",
         key: "karte1"
     },
     {
-        icon: "fas fa-cat",
+        icon: "",
         colour: "#F78181",
-        text: "",
+        text: "alle HTMLElemente",
         key: "karte2"
     },
     {
-        icon: "fas fa-dragon",
+        icon: "",
         colour: "#F5DA81",
-        text: "",
+        text: "Kaskadierung 10 =",
         key: "karte3"
     },
     {
-        icon: "fas fa-dragon",
+        icon: "",
         colour: "#F5DA81",
-        text: "",
+        text: "class",
         key: "karte4"
     },
     {
-        icon: "fas fa-fish",
+        icon: "",
         colour: "#81F781",
-        text: "",
+        text: "Kaskadierung 100 =",
         key: "karte5"
     },
     {
-        icon: "fas fa-fish",
+        icon: "",
         colour: "#81F781",
-        text: "",
+        text: "id",
         key: "karte6"
     },
     {
-        icon: "fas fa-horse",
+        icon: "",
         colour: "#819FF7",
-        text: "",
+        text: "let-Variablen haben…",
         key: "karte7"
     },
     {
-        icon: "fas fa-horse",
+        icon: "",
         colour: "#819FF7",
-        text: "",
+        text: "einen eingeschränkten Gültigkeitsbereich",
         key: "karte8"
+    },
+    {
+        icon: "",
+        colour: "#FE2E2E",
+        text: "Einer Variable wird ein Wert…",
+        key: "karte9"
+    },
+    {
+        icon: "",
+        colour: "#FE2E2E",
+        text: "durch den Zuweisungsoperator ‘=’ zugewiesen",
+        key: "karte10"
+    },
+    {
+        icon: "",
+        colour: "#9AFE2E",
+        text: "3 Variablentypen ...",
+        key: "karte11"
+    },
+    {
+        icon: "",
+        colour: "#9AFE2E",
+        text: "var, let, const",
+        key: "karte12"
+    },
+    {
+        icon: "",
+        colour: "#2EFE9A",
+        text: "Datentyp string ...",
+        key: "karte13"
+    },
+    {
+        icon: "",
+        colour: "#2EFE9A",
+        text: "ist eine Zeichenkette",
+        key: "karte14"
+    },
+    {
+        icon: "",
+        colour: "#2E9AFE",
+        text: "Datentyp number ...",
+        key: "karte15"
+    },
+    {
+        icon: "",
+        colour: "#2E9AFE",
+        text: "sind Zahlen",
+        key: "karte16"
+    },
+    {
+        icon: "",
+        colour: "#B40404",
+        text: "Datentyp boolean ...",
+        key: "karte17"
+    },
+    {
+        icon: "",
+        colour: "#B40404",
+        text: "sind Warheitswerte",
+        key: "karte18"
+    },
+    {
+        icon: "",
+        colour: "#8A4B08",
+        text: "Argumente werden ...",
+        key: "karte19"
+    },
+    {
+        icon: "",
+        colour: "#8A4B08",
+        text: "in den Argumentenklammern deklariert",
+        key: "karte20"
+    },
+    {
+        icon: "",
+        colour: "#5E610B",
+        text: "absoluter Pfad",
+        key: "karte21"
+    },
+    {
+        icon: "",
+        colour: "#5E610B",
+        text: "https://github.com",
+        key: "karte22"
+    },
+    {
+        icon: "",
+        colour: "#38610B",
+        text: "relativer Pfad =",
+        key: "karte23"
+    },
+    {
+        icon: "",
+        colour: "#38610B",
+        text: "/Aufgabe1/Style1.css",
+        key: "karte24"
+    },
+    {
+        icon: "",
+        colour: "#0B6121",
+        text: "Parsen 1.Variante =",
+        key: "karte25"
+    },
+    {
+        icon: "",
+        colour: "#0B6121",
+        text: "JS Datei am Ende des Bodys",
+        key: "karte26"
+    },
+    {
+        icon: "",
+        colour: "#0B614B",
+        text: "Parsen 2.Variante =",
+        key: "karte27"
+    },
+    {
+        icon: "",
+        colour: "#0B614B",
+        text: "defer/async hinter src im head",
+        key: "karte28"
+    },
+    {
+        icon: "",
+        colour: "#0B3861",
+        text: "Parsen 3.Variante =",
+        key: "karte29"
+    },
+    {
+        icon: "",
+        colour: "#0B3861",
+        text: "window.addEventListener",
+        key: "karte30"
+    },
+    {
+        icon: "",
+        colour: "#610B38",
+        text: "let ist immer ...",
+        key: "karte31"
+    },
+    {
+        icon: "",
+        colour: "#610B38",
+        text: "Block bezogen",
+        key: "karte32"
     }
 ];
 //MITTEL & SCHWER benötigen eine eigene computer function
@@ -90,14 +234,14 @@ var cards = [
 //In diesem werden die zwei Indexe verglichen ob sie gleich sind oder nicht.
 //Wenn diese gleich sind wird die function nocheinmal aufgerufen, bis die if-condition erfüllt ist.
 //Somit kann der Computer nicht eine Karten zwei mal aufdecken.
-function computer() {
+function computer3() {
     setTimeout(function () {
         //Wenn du Array Länge 4 ist, hört der Computer auf, random Zahlen auszuwählen und zu vergleichen.
-        if (computerIndex.length < 4) {
-            var random1 = Math.floor(Math.random() * cards.length); // Diese const müssen ebenfalls für MITTEL & SCHWER erstellt werden, da diese eine andere Array Länge haben.(cards.lenght)
-            var random2 = Math.floor(Math.random() * cards.length); // Diese const müssen ebenfalls für MITTEL & SCHWER erstellt werden, da diese eine andere Array Länge haben.(cards.lenght)
-            var randomCard1 = cards[random1];
-            var randomCard2 = cards[random2];
+        if (computerIndex.length < 16) {
+            var random1 = Math.floor(Math.random() * cards3.length); // Diese const müssen ebenfalls für MITTEL & SCHWER erstellt werden, da diese eine andere Array Länge haben.(cards.lenght)
+            var random2 = Math.floor(Math.random() * cards3.length); // Diese const müssen ebenfalls für MITTEL & SCHWER erstellt werden, da diese eine andere Array Länge haben.(cards.lenght)
+            var randomCard1 = cards3[random1];
+            var randomCard2 = cards3[random2];
             var card1 = document.querySelector(".card" + random1);
             var card2 = document.querySelector(".card" + random2);
             var randomArray = [];
@@ -107,20 +251,20 @@ function computer() {
             if (randomArray[0] != randomArray[1]) {
                 //random Karte1 muss die Klasse "hidden" besitzen.
                 if (card1.classList.contains("hidden")) {
-                    computer();
+                    computer3();
                     //random Karte2 muss die Klasse "hidden" besitzen.
                 }
                 else if (card2.classList.contains("hidden")) {
-                    computer();
+                    computer3();
                     //Wenn dise nicht diese Klasse besitzen wird die Funktion 
                     //element und time mit den jeweiligen randome Karten als
                     //Argument ausgeführt.
                 }
                 else {
-                    element(random1);
-                    element(random2);
-                    time(random1);
-                    time(random2);
+                    element3(random1);
+                    element3(random2);
+                    time3(random1);
+                    time3(random2);
                     randomArray = [];
                 }
                 //Wenn beide random Indexe gleich sind, wir die computer Funktion
@@ -128,13 +272,13 @@ function computer() {
                 //Sprich zwei unterschiedliche Indexe auswählt.   
             }
             else {
-                computer();
+                computer3();
             }
         }
     }, 200);
 }
 //Funktion time dreht die gewählte Karte des Computers nach einer bestimmten Zeit wieder um.
-function time(index) {
+function time3(index) {
     var card = document.querySelector(".card" + index);
     setTimeout(function () {
         card.innerHTML = "";
@@ -143,7 +287,7 @@ function time(index) {
 }
 //Schleife die das Grid mit den Array Objekten befüllt. Erzeugtes DIVElement  bekommt die Objekte aus dem Array,
 //als auch eine Hintergrundfarbe die als Rückseite erscheint.
-function cardGenerator() {
+function cardGenerator3() {
     var _loop_1 = function (index) {
         var card = document.createElement("div");
         card.classList.add("card");
@@ -152,7 +296,7 @@ function cardGenerator() {
         card.style.backgroundColor = "grey";
         //Das DIV Element grid (Spielfeld) bekommt die einzelne Karten/Objekte geerbt.
         //Somit werden die Karten im DOM sichtbar.
-        gridEASY.appendChild(card);
+        gridHARD.appendChild(card);
         //Klick Funktion auf den einzelnen Karten.
         card.addEventListener("click", function () {
             //Nur wenn der Spieler am Zug ist, kann der Index der geklickten Karten ins Array gepusht werden.
@@ -165,7 +309,7 @@ function cardGenerator() {
             //wird die Funktion element mit dem Index als Argument aufgerufen.
             if (userIndex.length == 1 && playerBo == true) {
                 computerBo = false;
-                element(index);
+                element3(index);
                 console.log(element);
                 //Wenn das Array zwei Indexe hat, wird noch eine Condition gestellt.
             }
@@ -178,7 +322,7 @@ function cardGenerator() {
                 //Ansonsten wird wieder die Funktion element mit dem Argument Index ausgeführt
                 //und danach wird das userIndex Array geleert.
                 else {
-                    element(index);
+                    element3(index);
                     userIndex = [];
                     console.log(userIndex);
                 }
@@ -187,48 +331,48 @@ function cardGenerator() {
     };
     //Die Schleife wiederholt sich so oft, wie die Länge des Arrays ist. Dadurch bekommt jede "Karte"/Objekt einmal die Klasse
     //und einmal den Index. Somit kann auf die CSS Klasse wie auch den Index der jeweiligen Karten zugegriffen werden.
-    for (var index = 0; index < cards.length; index++) {
+    for (var index = 0; index < cards3.length; index++) {
         _loop_1(index);
     }
 }
 //Funktion element pusht die verschiedenen Eigenschaften des cards Array in die nötigen Arrays.
 //Außerdem manipuliert sie den DOM, indem mit inner.HTML die Eigenschaften wie Farbe und Piktogram
 //auf die erzeugten DIVElemente gepackt werden.
-function element(index) {
+function element3(index) {
     //Wenn das hiddenArray kleiner als zwei ist, dann wird alles manipuliert und gepusht.
     // Die if Condition limitiert den Player auf zwei Klicks.
     if (hiddenArray.length < 2) {
         var card = document.querySelector(".card" + index);
-        card.innerHTML = "<i class='" + cards[index].icon + "'></i>";
-        card.style.backgroundColor = cards[index].colour;
+        card.innerHTML = cards3[index].text;
+        card.style.backgroundColor = cards3[index].colour;
         //Die Eigenschaft Farbe und Schlüssel werden in das leere Array openCards gepusht.
-        openCards.push(cards[index].colour);
-        openCards.push(cards[index].key);
+        openCards.push(cards3[index].colour);
+        openCards.push(cards3[index].key);
         console.log(openCards);
         //Das erzeugte DIVElement card wird in das leere hiddenArray gepusht.
         hiddenArray.push(card);
         console.log(hiddenArray);
         //Funktion addClickedCards wird mit dem Argument Index aufgerufen
-        addClickedCards(index);
+        addClickedCards3(index);
     }
 }
 //Erzeugte DIVs (Karten) werden beim neu laden der Seite/Spiels durcheinander angeordnet. 
 //Dabei bekommen die Index Plätze random die Eigenschaften/Werte zugeschrieben.
-function randomizeArray() {
-    cards.sort(function () { return 0.5 - Math.random(); });
+function randomizeArray3() {
+    cards3.sort(function () { return 0.5 - Math.random(); });
 }
-randomizeArray();
+randomizeArray3();
 //Funktion addClickedCards limitiert die Länge des openCards Array auf maximal zwei Karten.
 //Jedes mal wenn eine Karte geklickt wird, werden die zwei Eigenschaften (Farbe und Schlüssel) 
 //ins openCards Array gepusht. Wenn zwei Karten (4 Eigenschaften/Werte) im Array sind, wird
 //die Funktion matchingCards aufgerufen.
-function addClickedCards(index) {
+function addClickedCards3(index) {
     if (openCards.length == 4) {
-        matchingCards();
+        matchingCards3();
     }
 }
 //Funktion matchingCards vergleicht ob die geklickten Karten ein Paar sind oder nicht.
-function matchingCards() {
+function matchingCards3() {
     //setTimeout sagt das die Funktion sobald ein Kartenpaar gefunden wurde,
     //noch 1 Sekunde geöffnet bleibt.
     setTimeout(function () {
@@ -252,8 +396,8 @@ function matchingCards() {
             //nochmal einen Zug hat. Anschließend werden die Karten Arrays wieder geleert.
             if (computerBo == true) {
                 scoreComputerArray.push(1);
-                counter();
-                computer();
+                counter3();
+                computer3();
                 hiddenArray = [];
                 openCards = [];
             }
@@ -262,7 +406,7 @@ function matchingCards() {
             //Anschließend werden die Karten Arrays wieder geleert.
             if (computerBo == false) {
                 scorePlayerArray.push(1);
-                counter();
+                counter3();
                 hiddenArray = [];
                 openCards = [];
             }
@@ -300,24 +444,24 @@ function matchingCards() {
                     console.log(hiddenArray);
                     console.log(openCards);
                     playerBo = false;
-                    computer();
+                    computer3();
                 }, 1000);
             }
         }
     }, 1000);
 }
 //Funktion counter erhöht den Spielstand der Spieler, welches ein Kartenpaar aufgedeckt haben.
-function counter() {
+function counter3() {
     //Diese var ist der Gesamtpunktestand. Somit kann ich sagen wann das Spiel zuende ist.
     var res = scorePlayerArray.length + scoreComputerArray.length;
     //Spielstand der einzelnen wird bei aktuallisierung manipuliert.
-    scoreComputer.innerHTML = "Score" + scoreComputerArray.length;
-    scoreUser.innerHTML = "Score" + scorePlayerArray.length;
+    scoreComputer.innerHTML = "Cpmputer" + scoreComputerArray.length;
+    scoreUser.innerHTML = "Player" + scorePlayerArray.length;
     //Wenn der Gesamtpunktestand 4 erreicht, dann wird das Spielfeld verschwinden
     //und die Gewinnbenachrichtigung mit dem replay button erscheinen.
-    if (res == 4) {
+    if (res == 16) {
         afterGame.setAttribute("style", "display:unset");
-        gamefieldEASY.setAttribute("style", "display:none");
+        gamefieldHARD.setAttribute("style", "display:none");
         //Wenn der Punktestand des Computers größer ist, wird die Gewinnbenachrichtigung
         //manipuliert und ändert sich von YOU WIN zu YOU LOSE.
         if (scoreComputerArray.length > scorePlayerArray.length) {
@@ -335,103 +479,4 @@ function counter() {
 replay.addEventListener("click", function () {
     location.reload();
 });
-//Karten Array LEICHT
-var cards2 = [
-    {
-        icon: "fas fa-cat",
-        colour: "#F78181",
-        text: "",
-        key: "karte1"
-    },
-    {
-        icon: "fas fa-cat",
-        colour: "#F78181",
-        text: "",
-        key: "karte2"
-    },
-    {
-        icon: "fas fa-dragon",
-        colour: "#F5DA81",
-        text: "",
-        key: "karte3"
-    },
-    {
-        icon: "fas fa-dragon",
-        colour: "#F5DA81",
-        text: "",
-        key: "karte4"
-    },
-    {
-        icon: "fas fa-fish",
-        colour: "#81F781",
-        text: "",
-        key: "karte5"
-    },
-    {
-        icon: "fas fa-fish",
-        colour: "#81F781",
-        text: "",
-        key: "karte6"
-    },
-    {
-        icon: "fas fa-horse",
-        colour: "#819FF7",
-        text: "",
-        key: "karte7"
-    },
-    {
-        icon: "fas fa-horse",
-        colour: "#819FF7",
-        text: "",
-        key: "karte8"
-    },
-    {
-        icon: "fas fa-bacterium",
-        colour: "#FE2E2E",
-        text: "",
-        key: "karte9"
-    },
-    {
-        icon: "fas fa-bacterium",
-        colour: "#FE2E2E",
-        text: "",
-        key: "karte10"
-    },
-    {
-        icon: "fas fa-bahai",
-        colour: "#9AFE2E",
-        text: "",
-        key: "karte11"
-    },
-    {
-        icon: "fas fa-bahai",
-        colour: "#9AFE2E",
-        text: "",
-        key: "karte12"
-    },
-    {
-        icon: "fas fa-bolt",
-        colour: "#2EFE9A",
-        text: "",
-        key: "karte13"
-    },
-    {
-        icon: "fas fa-bolt",
-        colour: "#2EFE9A",
-        text: "",
-        key: "karte14"
-    },
-    {
-        icon: "fas fa-bug",
-        colour: "#2E9AFE",
-        text: "",
-        key: "karte15"
-    },
-    {
-        icon: "fas fa-bug",
-        colour: "#2E9AFE",
-        text: "",
-        key: "karte16"
-    }
-];
-//# sourceMappingURL=script.js.map
+//# sourceMappingURL=scriptSchwer.js.map

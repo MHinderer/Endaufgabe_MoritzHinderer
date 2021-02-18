@@ -9,23 +9,40 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
+    <script src="scriptMittel.js" defer></script>
+    <script src="scriptSchwer.js" defer></script>
 </head>
-
 <body class="body">
     <div class="menü">
         <button id="easyButton">LEICHT</button>
         <button id="middleButton">MITTEL</button>
         <button id="hardButton">SCHWER</button>
     </div>
-    <div class="gamefield">
-        <div class="scoreC">Score : <span class="scoreComputer">0</span></div>
-        <div class="scoreU">Score : <span class="scoreUser">0</span></div>
-        <div class="grid"></div>
+
+
+    <div class="gamefieldEASY">
+        <div class="scoreComputer">Computer : 0</div>
+        <div class="scoreUser">0 : Player</div>
+        <div class="gridEASY"></div>
     </div>
+    <div class="gamefieldMIDDLE">
+        <div class="scoreComputer2">Computer : 0</div>
+        <div class="scoreUser2">0 : Player</div>
+        <div class="gridMIDDLE"></div>
+    </div>
+    <div class="gamefieldHARD">
+        <div class="scoreComputer3">Computer : 0</div>
+        <div class="scoreUser3">0 : Player</div>
+        <div class="gridHARD"></div>
+    </div>
+
+
     <div id="afterGame">
         <h2 class="winMessage">YOU WON</h2>
         <button id="replay">REPLAY</button>
     </div>
+
+
     <footer id="footer">
         <p>Student: Moritz Hinderer &nbsp; &nbsp; &nbsp; Matrikelnummer: 267208</p>
     </footer>

@@ -29,7 +29,29 @@ body {
     justify-content: center;
 }
 
-.grid {
+.gridEASY {
+    display: grid;
+    grid-template-columns: repeat( auto-fit, 120px );
+    grid-auto-rows: 120px;
+    grid-gap: 5px;
+    justify-content: center;
+    perspective: 1000px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.gridHARD {
+    display: grid;
+    grid-template-columns: repeat( auto-fit, 120px );
+    grid-auto-rows: 120px;
+    grid-gap: 5px;
+    justify-content: center;
+    perspective: 1000px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.gridMIDDLE {
     display: grid;
     grid-template-columns: repeat( auto-fit, 120px );
     grid-auto-rows: 120px;
@@ -40,43 +62,38 @@ body {
     margin: 0 auto;
 }
     
-    .card { 
-    display: inline-flex;
-    align-content: center;
-    justify-content: center;
-    margin: 2px; 
-    transform-style: preserve-3d; 
-    transition: transform 0.5s; 
-    font-size: 50px;
-    } 
-    
-    .card.flip { 
-    transform: rotateY(180deg); 
-    } 
-    
-    .data { 
-    display: flex; 
-    justify-content: space-between; 
-    padding: 20px 30px; 
-    font-size: 23px; 
-    } 
-    
-    .data span { 
-    color: rgb(206, 121, 11);
-    font-size: 30px; 
-    }
+.card { 
+display: inline-flex;
+align-items: center;
+justify-content: center;
+margin: 2px; 
+transform-style: preserve-3d; 
+transition: transform 0.5s; 
+font-size: 10px;
+} 
+
+.card.flip { 
+transform: rotateY(180deg); 
+} 
 
 .hidden {
     visibility: hidden;
 }
 
-.gamefield {
+.gamefieldEASY {
+    display: none;
+}
+
+.gamefieldMIDDLE {
+    display: none;
+}
+
+.gamefieldHARD {
     display: none;
 }
 
 
 #afterGame {
-    z-index: 2;
     display: none;
     justify-content: center;
     align-content: center;
