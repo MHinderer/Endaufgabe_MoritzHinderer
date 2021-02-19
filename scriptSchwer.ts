@@ -12,6 +12,7 @@ var hardButton: HTMLButtonElement = (document.getElementById("hardButton") as HT
 var winMessage: HTMLElement = document.querySelector(".winMessage");
 var replay: HTMLButtonElement = document.querySelector("#replay");
 var afterGame: HTMLDivElement = document.querySelector("#afterGame");
+var memory: HTMLDivElement = document.querySelector(".Memory");
 
 //Boolean Werte
 var playerBo: boolean = false;
@@ -23,6 +24,7 @@ var computerBo: boolean = true;
 //damit sich bei weiterem klicken darauf, keine neue Karten generieren.
 hardButton.addEventListener("click", function(): void {
     menü.setAttribute("style", "display:none");
+    memory.setAttribute("style", "display:none");
     gamefieldHARD.setAttribute("style", "display:unset");
     cardGenerator3();
     setTimeout (() => {

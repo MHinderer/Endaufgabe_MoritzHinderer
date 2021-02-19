@@ -9,6 +9,7 @@ var easyButton = document.getElementById("easyButton");
 var winMessage = document.querySelector(".winMessage");
 var replay = document.querySelector("#replay");
 var afterGame = document.querySelector("#afterGame");
+var memory = document.querySelector(".Memory");
 //Boolean Werte
 var playerBo = false;
 var computerBo = true;
@@ -18,6 +19,7 @@ var computerBo = true;
 //damit sich bei weiterem klicken darauf, keine neue Karten generieren.
 easyButton.addEventListener("click", function () {
     menü.setAttribute("style", "display:none");
+    memory.setAttribute("style", "display:none");
     gamefieldEASY.setAttribute("style", "display:unset");
     cardGenerator();
     setTimeout(function () {

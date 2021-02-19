@@ -12,6 +12,7 @@ var middleButton: HTMLButtonElement = (document.getElementById("middleButton") a
 var winMessage: HTMLElement = document.querySelector(".winMessage");
 var replay: HTMLButtonElement = document.querySelector("#replay");
 var afterGame: HTMLDivElement = document.querySelector("#afterGame");
+var memory: HTMLDivElement = document.querySelector(".Memory");
 
 //Boolean Werte
 var playerBo: boolean = false;
@@ -23,6 +24,7 @@ var computerBo: boolean = true;
 //damit sich bei weiterem klicken darauf, keine neue Karten generieren.
 middleButton.addEventListener("click", function(): void {
     menü.setAttribute("style", "display:none");
+    memory.setAttribute("style", "display:none");
     gamefieldMIDDLE.setAttribute("style", "display:unset");
     cardGenerator2();
     setTimeout (() => {
