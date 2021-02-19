@@ -22,22 +22,16 @@ body {
     font-weight: 300;
 }
 
-#gamemody {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .gridEASY {
     display: grid;
     grid-template-columns: repeat( auto-fit, 120px );
     grid-auto-rows: 120px;
     grid-gap: 5px;
     justify-content: center;
-    perspective: 1000px;
-    max-width: 1000px;
-    margin: 0 auto;
+    perspective: 500px;
+    max-width: 500px;
+    margin-top: 240px;
+    margin-left: 390px;
 }
 
 .gridHARD {
@@ -48,7 +42,8 @@ body {
     justify-content: center;
     perspective: 1000px;
     max-width: 1000px;
-    margin: 0 auto;
+    margin-top: 100px;
+    margin-left: 140px;
 }
 
 .gridMIDDLE {
@@ -57,9 +52,10 @@ body {
     grid-auto-rows: 120px;
     grid-gap: 5px;
     justify-content: center;
-    perspective: 1000px;
-    max-width: 1000px;
-    margin: 0 auto;
+    perspective: 500px;
+    max-width: 500px;
+    margin-top: 100px;
+    margin-left: 390px;
 }
     
 .card { 
@@ -72,9 +68,19 @@ transition: transform 0.5s;
 font-size: 10px;
 } 
 
-.card.flip { 
-transform: rotateY(180deg); 
+.card.is-flipped { 
+    transform: rotateY(180deg);
 } 
+
+.cardEASY {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+margin: 2px; 
+transform-style: preserve-3d; 
+transition: transform 0.5s; 
+font-size: 40px;
+}
 
 .hidden {
     visibility: hidden;
@@ -93,9 +99,64 @@ transform: rotateY(180deg);
 }
 
 
-#afterGame {
-    display: none;
+.menü {
     justify-content: center;
-    align-content: center;
+    justify-self: center;
+    background-color: #424242;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 250px;
+    border-style: groove;
+    border-radius: 10px;
+    border-color: black;
+    width: 400px;
+    height: 250px;
+    padding: 0px;
 }
 
+button {
+    position: relative;
+    display: inline-block;
+    background-color: #F7BE81;
+    border-radius: 10px;
+    border: 2px solid black;
+    width: 200px;
+    margin-top: 35px;
+    margin-left: 100px;
+    padding: 8px;
+    color: black;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+button:hover {
+    opacity: 70%;
+    cursor: pointer;
+}
+
+#afterGame {
+    display: none;
+    background-color: #424242;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 250px;
+    border-style: groove;
+    border-radius: 10px;
+    border-color: black;
+    width: 400px;
+    height: 250px;
+    padding: 0px;
+}
+
+.score {
+    font-size: 30px;
+    font-weight: 800;
+    justify-content: center;
+    align-items: center;
+    margin-left: 450px;
+}
+
+.winMessage {
+    text-shadow: black;
+}

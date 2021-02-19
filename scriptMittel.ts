@@ -5,8 +5,8 @@
 //Variablen definieren und somit die DOM Element später zu manipulieren
 var menü: HTMLDivElement = document.querySelector(".menü");
 var gridMIDDLE: HTMLDivElement = document.querySelector(".gridMIDDLE");
-var scoreComputer: HTMLSpanElement = document.querySelector(".scoreComputer2");
-var scoreUser: HTMLSpanElement = document.querySelector(".scoreUser2");
+var scoreComputer2: HTMLSpanElement = document.querySelector(".scoreComputer2");
+var scoreUser2: HTMLSpanElement = document.querySelector(".scoreUser2");
 var gamefieldMIDDLE: HTMLDivElement = document.querySelector(".gamefieldMIDDLE");
 var middleButton: HTMLButtonElement = (document.getElementById("middleButton") as HTMLButtonElement);
 var winMessage: HTMLElement = document.querySelector(".winMessage");
@@ -54,97 +54,97 @@ var cards2: Wearth[] = [
     {
         icon: "fas fa-cat",
         colour: "#F78181",
-        text: "",
+        text: "Kaskadierung 1 =",
         key: "karte1"
     },
     {
         icon: "fas fa-cat",
         colour: "#F78181",
-        text: "",
+        text: "alle HTMLElemente",
         key: "karte2"
     },
     {
         icon: "fas fa-dragon",
         colour: "#F5DA81",
-        text: "",
+        text: "Kaskadierung 10 =",
         key: "karte3"
     },
     {
         icon: "fas fa-dragon",
         colour: "#F5DA81",
-        text: "",
+        text: "class",
         key: "karte4"
     },
     {
         icon: "fas fa-fish",
         colour: "#81F781",
-        text: "",
+        text: "Kaskadierung 100 =",
         key: "karte5"
     },
     {
         icon: "fas fa-fish",
         colour: "#81F781",
-        text: "",
+        text: "id",
         key: "karte6"
     },
     {
         icon: "fas fa-horse",
         colour: "#819FF7",
-        text: "",
+        text: "let-Variablen haben…",
         key: "karte7"
     },
     {
         icon: "fas fa-horse",
         colour: "#819FF7",
-        text: "",
+        text: "einen eingeschränkten Gültigkeitsbereich",
         key: "karte8"
     },
     {
         icon: "fas fa-dog",
         colour: "#FE2E2E",
-        text: "",
+        text: "Einer Variable wird ein Wert…",
         key: "karte9"
     },
     {
         icon: "fas fa-dog",
         colour: "#FE2E2E",
-        text: "",
+        text: "durch den Zuweisungsoperator ‘=’ zugewiesen",
         key: "karte10"
     },
     {
         icon: "fas fa-frog",
         colour: "#9AFE2E",
-        text: "",
+        text: "3 Variablentypen ...",
         key: "karte11"
     },
     {
         icon: "fas fa-frog",
         colour: "#9AFE2E",
-        text: "",
+        text: "var, let, const",
         key: "karte12"
     },
     {
         icon: "fas fa-bolt",
         colour: "#2EFE9A",
-        text: "",
+        text: "Datentyp string ...",
         key: "karte13"
     },
     {
         icon: "fas fa-bolt",
         colour: "#2EFE9A",
-        text: "",
+        text: "ist eine Zeichenkette",
         key: "karte14"
     },
     {
         icon: "fas fa-bug",
         colour: "#2E9AFE",
-        text: "",
+        text: "Datentyp number ...",
         key: "karte15"
     },
     {
         icon: "fas fa-bug",
         colour: "#2E9AFE",
-        text: "",
+        text: "sind Zahlen",
         key: "karte16"
     }
 ];
@@ -236,14 +236,12 @@ for (let index: number = 0; index < cards2.length; index++) {
         //Somit wird verhindert, dass der Player während der Computer am Zug ist, klicken kann.
         if (playerBo == true) {
         userIndex.push(index);
-        console.log(userIndex);
         }
         //Wenn der Player am Zug ist und schon ein Index ins Array gepusht wurde,
         //wird die Funktion element mit dem Index als Argument aufgerufen.
         if (userIndex.length == 1 && playerBo == true) {
                 computerBo = false;
                 element2(index);
-                console.log(element);
             //Wenn das Array zwei Indexe hat, wird noch eine Condition gestellt.
             }
             else if (userIndex.length == 2) {
@@ -257,7 +255,6 @@ for (let index: number = 0; index < cards2.length; index++) {
                 else {
                     element2(index);
                     userIndex = [];
-                    console.log(userIndex);
                 }
             }
     });
@@ -278,11 +275,9 @@ function element2(index: number): void {
     //Die Eigenschaft Farbe und Schlüssel werden in das leere Array openCards gepusht.
     openCards.push(cards2[index].colour);
     openCards.push(cards2[index].key);
-    console.log(openCards);
 
     //Das erzeugte DIVElement card wird in das leere hiddenArray gepusht.
     hiddenArray.push(card);
-    console.log(hiddenArray);
 
     //Funktion addClickedCards wird mit dem Argument Index aufgerufen
     addClickedCards2(index);
@@ -318,7 +313,6 @@ function matchingCards2(): void {
     if (openCards[0] == openCards[2] && openCards[1] != openCards[3]) {
         hiddenArray[0].classList.add("hidden");
         hiddenArray[1].classList.add("hidden");
-        console.log(openCards[0] == openCards[2] && openCards[1] != openCards[3]);
         //Bei jedem erkannten Kartenpaar wird eine Nummer in das computerIndex Array gepusht.
         //Somit weis der Computer in der computer Funktion, wann das Spiel zu Ende ist.
         computerIndex.push(1);
@@ -381,12 +375,6 @@ function matchingCards2(): void {
                 hiddenArray = [];
                 openCards = [];
 
-                console.log(computerBo);
-                console.log(playerBo);
-
-                console.log(hiddenArray);
-                console.log(openCards);
-
                 playerBo = false;
 
                 computer2();
@@ -401,8 +389,8 @@ function counter2(): void {
     //Diese var ist der Gesamtpunktestand. Somit kann ich sagen wann das Spiel zuende ist.
     var res: number = scorePlayerArray.length + scoreComputerArray.length;
     //Spielstand der einzelnen wird bei aktuallisierung manipuliert.
-    scoreComputer.innerHTML = "Computer" + scoreComputerArray.length;
-    scoreUser.innerHTML = "Player" + scorePlayerArray.length;
+    scoreComputer2.innerHTML = "Computer " + scoreComputerArray.length + " : ";
+    scoreUser2.innerHTML =  scorePlayerArray.length + " Player";
 
     //Wenn der Gesamtpunktestand 4 erreicht, dann wird das Spielfeld verschwinden
     //und die Gewinnbenachrichtigung mit dem replay button erscheinen.

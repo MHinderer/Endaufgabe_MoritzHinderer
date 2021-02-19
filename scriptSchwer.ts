@@ -5,8 +5,8 @@
 //Variablen definieren und somit die DOM Element später zu manipulieren
 var menü: HTMLDivElement = document.querySelector(".menü");
 var gridHARD: HTMLDivElement = document.querySelector(".gridHARD");
-var scoreComputer: HTMLSpanElement = document.querySelector(".scoreComputer3");
-var scoreUser: HTMLSpanElement = document.querySelector(".scoreUser3");
+var scoreComputer3: HTMLSpanElement = document.querySelector(".scoreComputer3");
+var scoreUser3: HTMLSpanElement = document.querySelector(".scoreUser3");
 var gamefieldHARD: HTMLDivElement = document.querySelector(".gamefieldHARD");
 var hardButton: HTMLButtonElement = (document.getElementById("hardButton") as HTMLButtonElement);
 var winMessage: HTMLElement = document.querySelector(".winMessage");
@@ -332,14 +332,12 @@ for (let index: number = 0; index < cards3.length; index++) {
         //Somit wird verhindert, dass der Player während der Computer am Zug ist, klicken kann.
         if (playerBo == true) {
         userIndex.push(index);
-        console.log(userIndex);
         }
         //Wenn der Player am Zug ist und schon ein Index ins Array gepusht wurde,
         //wird die Funktion element mit dem Index als Argument aufgerufen.
         if (userIndex.length == 1 && playerBo == true) {
                 computerBo = false;
                 element3(index);
-                console.log(element);
             //Wenn das Array zwei Indexe hat, wird noch eine Condition gestellt.
             }
             else if (userIndex.length == 2) {
@@ -353,7 +351,6 @@ for (let index: number = 0; index < cards3.length; index++) {
                 else {
                     element3(index);
                     userIndex = [];
-                    console.log(userIndex);
                 }
             }
     });
@@ -374,11 +371,9 @@ function element3(index: number): void {
     //Die Eigenschaft Farbe und Schlüssel werden in das leere Array openCards gepusht.
     openCards.push(cards3[index].colour);
     openCards.push(cards3[index].key);
-    console.log(openCards);
 
     //Das erzeugte DIVElement card wird in das leere hiddenArray gepusht.
     hiddenArray.push(card);
-    console.log(hiddenArray);
 
     //Funktion addClickedCards wird mit dem Argument Index aufgerufen
     addClickedCards3(index);
@@ -414,7 +409,6 @@ function matchingCards3(): void {
     if (openCards[0] == openCards[2] && openCards[1] != openCards[3]) {
         hiddenArray[0].classList.add("hidden");
         hiddenArray[1].classList.add("hidden");
-        console.log(openCards[0] == openCards[2] && openCards[1] != openCards[3]);
         //Bei jedem erkannten Kartenpaar wird eine Nummer in das computerIndex Array gepusht.
         //Somit weis der Computer in der computer Funktion, wann das Spiel zu Ende ist.
         computerIndex.push(1);
@@ -477,12 +471,6 @@ function matchingCards3(): void {
                 hiddenArray = [];
                 openCards = [];
 
-                console.log(computerBo);
-                console.log(playerBo);
-
-                console.log(hiddenArray);
-                console.log(openCards);
-
                 playerBo = false;
 
                 computer3();
@@ -497,8 +485,8 @@ function counter3(): void {
     //Diese var ist der Gesamtpunktestand. Somit kann ich sagen wann das Spiel zuende ist.
     var res: number = scorePlayerArray.length + scoreComputerArray.length;
     //Spielstand der einzelnen wird bei aktuallisierung manipuliert.
-    scoreComputer.innerHTML = "Cpmputer" + scoreComputerArray.length;
-    scoreUser.innerHTML = "Player" + scorePlayerArray.length;
+    scoreComputer3.innerHTML = "Computer " + scoreComputerArray.length + " : ";
+    scoreUser3.innerHTML =  scorePlayerArray.length + " Player";
 
     //Wenn der Gesamtpunktestand 4 erreicht, dann wird das Spielfeld verschwinden
     //und die Gewinnbenachrichtigung mit dem replay button erscheinen.

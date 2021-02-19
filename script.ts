@@ -117,8 +117,8 @@ function computer(): void {
     const randomCard1: Wearth = cards[random1];                                             
     const randomCard2: Wearth = cards[random2];                                             
 
-    let card1: HTMLDivElement = document.querySelector(".card" + random1);                  
-    let card2: HTMLDivElement = document.querySelector(".card" + random2);                  
+    let card1: HTMLDivElement = document.querySelector(".cardEASY" + random1);                  
+    let card2: HTMLDivElement = document.querySelector(".cardEASY" + random2);                  
 
     var randomArray: number[] = [];
     randomArray.push(random1);                                                              
@@ -155,10 +155,10 @@ function computer(): void {
 
 //Funktion time dreht die gewählte Karte des Computers nach einer bestimmten Zeit wieder um.
 function time(index: number): void {
-    let card: HTMLDivElement = document.querySelector(".card" + index);
+    let cardEASY: HTMLDivElement = document.querySelector(".cardEASY" + index);
     setTimeout (() => {
-        card.innerHTML = "";
-        card.style.backgroundColor = "grey";
+        cardEASY.innerHTML = "";
+        cardEASY.style.backgroundColor = "grey";
     },          1000);
 }
 
@@ -171,31 +171,29 @@ function cardGenerator(): void {
 //Die Schleife wiederholt sich so oft, wie die Länge des Arrays ist. Dadurch bekommt jede "Karte"/Objekt einmal die Klasse
 //und einmal den Index. Somit kann auf die CSS Klasse wie auch den Index der jeweiligen Karten zugegriffen werden.
 for (let index: number = 0; index < cards.length; index++) {
-    let card: HTMLDivElement = document.createElement("div");
-    card.classList.add("card");
-    card.classList.add("card" + index);
+    let cardEASY: HTMLDivElement = document.createElement("div");
+    cardEASY.classList.add("cardEASY");
+    cardEASY.classList.add("cardEASY" + index);
     
     //Die Rückseite bekommt die Fabre
-    card.style.backgroundColor = "grey";
+    cardEASY.style.backgroundColor = "grey";
 
     //Das DIV Element grid (Spielfeld) bekommt die einzelne Karten/Objekte geerbt.
     //Somit werden die Karten im DOM sichtbar.
-    gridEASY.appendChild(card);
+    gridEASY.appendChild(cardEASY);
 
     //Klick Funktion auf den einzelnen Karten.
-    card.addEventListener("click", function (): void {
+    cardEASY.addEventListener("click", function (): void {
         //Nur wenn der Spieler am Zug ist, kann der Index der geklickten Karten ins Array gepusht werden.
         //Somit wird verhindert, dass der Player während der Computer am Zug ist, klicken kann.
         if (playerBo == true) {
         userIndex.push(index);
-        console.log(userIndex);
         }
         //Wenn der Player am Zug ist und schon ein Index ins Array gepusht wurde,
         //wird die Funktion element mit dem Index als Argument aufgerufen.
         if (userIndex.length == 1 && playerBo == true) {
                 computerBo = false;
                 element(index);
-                console.log(element);
             //Wenn das Array zwei Indexe hat, wird noch eine Condition gestellt.
             }
             else if (userIndex.length == 2) {
@@ -209,7 +207,6 @@ for (let index: number = 0; index < cards.length; index++) {
                 else {
                     element(index);
                     userIndex = [];
-                    console.log(userIndex);
                 }
             }
     });
@@ -223,18 +220,16 @@ function element(index: number): void {
     //Wenn das hiddenArray kleiner als zwei ist, dann wird alles manipuliert und gepusht.
     // Die if Condition limitiert den Player auf zwei Klicks.
     if ( hiddenArray.length < 2) {
-    let card: HTMLDivElement = document.querySelector(".card" + index);
-    card.innerHTML = "<i class='" + cards[index].icon + "'></i>";
-    card.style.backgroundColor = cards[index].colour;
+    let cardEASY: HTMLDivElement = document.querySelector(".cardEASY" + index);
+    cardEASY.innerHTML = "<i class='" + cards[index].icon + "'></i>";
+    cardEASY.style.backgroundColor = cards[index].colour;
 
     //Die Eigenschaft Farbe und Schlüssel werden in das leere Array openCards gepusht.
     openCards.push(cards[index].colour);
     openCards.push(cards[index].key);
-    console.log(openCards);
 
     //Das erzeugte DIVElement card wird in das leere hiddenArray gepusht.
-    hiddenArray.push(card);
-    console.log(hiddenArray);
+    hiddenArray.push(cardEASY);
 
     //Funktion addClickedCards wird mit dem Argument Index aufgerufen
     addClickedCards(index);
@@ -270,7 +265,6 @@ function matchingCards(): void {
     if (openCards[0] == openCards[2] && openCards[1] != openCards[3]) {
         hiddenArray[0].classList.add("hidden");
         hiddenArray[1].classList.add("hidden");
-        console.log(openCards[0] == openCards[2] && openCards[1] != openCards[3]);
         //Bei jedem erkannten Kartenpaar wird eine Nummer in das computerIndex Array gepusht.
         //Somit weis der Computer in der computer Funktion, wann das Spiel zu Ende ist.
         computerIndex.push(1);
@@ -333,12 +327,6 @@ function matchingCards(): void {
                 hiddenArray = [];
                 openCards = [];
 
-                console.log(computerBo);
-                console.log(playerBo);
-
-                console.log(hiddenArray);
-                console.log(openCards);
-
                 playerBo = false;
 
                 computer();
@@ -353,14 +341,14 @@ function counter(): void {
     //Diese var ist der Gesamtpunktestand. Somit kann ich sagen wann das Spiel zuende ist.
     var res: number = scorePlayerArray.length + scoreComputerArray.length;
     //Spielstand der einzelnen wird bei aktuallisierung manipuliert.
-    scoreComputer.innerHTML = "Score" + scoreComputerArray.length;
-    scoreUser.innerHTML = "Score" + scorePlayerArray.length;
+    scoreComputer.innerHTML = "Computer " + scoreComputerArray.length + " : ";
+    scoreUser.innerHTML =  scorePlayerArray.length + " Player";
 
     //Wenn der Gesamtpunktestand 4 erreicht, dann wird das Spielfeld verschwinden
     //und die Gewinnbenachrichtigung mit dem replay button erscheinen.
     if ( res == 4) {
-        afterGame.setAttribute("style", "display:unset");
         gamefieldEASY.setAttribute("style", "display:none");
+        afterGame.setAttribute("style", "display:unset");
         //Wenn der Punktestand des Computers größer ist, wird die Gewinnbenachrichtigung
         //manipuliert und ändert sich von YOU WIN zu YOU LOSE.
         if (scoreComputerArray.length > scorePlayerArray.length) {
@@ -379,106 +367,3 @@ function counter(): void {
 replay.addEventListener("click", function (): void {
     location.reload();
 });
-
-
-
-
-//Karten Array LEICHT
-var cards2: Wearth[] = [
-    {
-        icon: "fas fa-cat",
-        colour: "#F78181",
-        text: "",
-        key: "karte1"
-    },
-    {
-        icon: "fas fa-cat",
-        colour: "#F78181",
-        text: "",
-        key: "karte2"
-    },
-    {
-        icon: "fas fa-dragon",
-        colour: "#F5DA81",
-        text: "",
-        key: "karte3"
-    },
-    {
-        icon: "fas fa-dragon",
-        colour: "#F5DA81",
-        text: "",
-        key: "karte4"
-    },
-    {
-        icon: "fas fa-fish",
-        colour: "#81F781",
-        text: "",
-        key: "karte5"
-    },
-    {
-        icon: "fas fa-fish",
-        colour: "#81F781",
-        text: "",
-        key: "karte6"
-    },
-    {
-        icon: "fas fa-horse",
-        colour: "#819FF7",
-        text: "",
-        key: "karte7"
-    },
-    {
-        icon: "fas fa-horse",
-        colour: "#819FF7",
-        text: "",
-        key: "karte8"
-    },
-    {
-        icon: "fas fa-bacterium",
-        colour: "#FE2E2E",
-        text: "",
-        key: "karte9"
-    },
-    {
-        icon: "fas fa-bacterium",
-        colour: "#FE2E2E",
-        text: "",
-        key: "karte10"
-    },
-    {
-        icon: "fas fa-bahai",
-        colour: "#9AFE2E",
-        text: "",
-        key: "karte11"
-    },
-    {
-        icon: "fas fa-bahai",
-        colour: "#9AFE2E",
-        text: "",
-        key: "karte12"
-    },
-    {
-        icon: "fas fa-bolt",
-        colour: "#2EFE9A",
-        text: "",
-        key: "karte13"
-    },
-    {
-        icon: "fas fa-bolt",
-        colour: "#2EFE9A",
-        text: "",
-        key: "karte14"
-    },
-    {
-        icon: "fas fa-bug",
-        colour: "#2E9AFE",
-        text: "",
-        key: "karte15"
-    },
-    {
-        icon: "fas fa-bug",
-        colour: "#2E9AFE",
-        text: "",
-        key: "karte16"
-    }
-];
